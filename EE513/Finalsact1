@@ -1,0 +1,202 @@
+import java.util.Scanner;
+
+class Node {
+    int key;
+    Node left, right;
+
+    public Node(int item) {
+        key = item;
+        left = right = null;
+    }
+}
+
+class BinaryTree {
+    Node root;
+
+    BinaryTree() {
+        root = null;
+    }
+
+    void insert(int key) {
+        root = insertRec(root, key);
+    }
+
+    Node insertRec(Node root, int key) {
+        if (root == null) {
+            root = new Node(key);
+            return root;
+        }
+
+        if (key < root.key)
+            root.left = insertRec(root.left, key);
+        else if (key > root.key)
+            root.right = insertRec(root.right, key);
+
+        return root;
+    }
+
+    boolean isEmpty() {
+        return root == null;
+    }
+
+    boolean search(int key) {
+        return searchRec(root, key);
+    }
+
+    boolean searchRec(Node root, int key) {
+        if (root == null)
+            return false;
+
+        if (root.key == key)
+            return true;
+
+        if (key < root.key)
+            return searchRec(root.left, key);
+        else
+            return searchRec(root.right, key);
+    }
+
+    void delete(int key) {
+        root = deleteRec(root, key);
+    }
+
+    Node deleteRec(Node root, int key) {
+        if (root == null)
+            return root;
+
+        if (key < root.key)
+            root.left = deleteRec(root.left, key);
+        else if (key > root.key)
+            root.right = deleteRec(root.right, key);
+        else {
+            if (root.left == null)
+                return root.right;
+            else if (root.right == null)
+                return root.left;
+
+            root.key = minValue(root.right);
+            root.right = deleteRec(root.right, root.key);
+        }
+
+        return root;
+    }
+
+    int minValue(Node root) {
+        int minValue = root.key;
+        while (root.left != null) {
+            minValue = root.left.key;
+            root = root.left;
+        }
+        return minValue;
+    }
+
+    int height() {
+        return heightRec(root);
+    }
+
+    int heightRec(Node root) {
+        if (root == null)
+            return -1;
+
+        int leftHeight = heightRec(root.left);
+        int rightHeight = heightRec(root.right);
+
+        return Math.max(leftHeight, rightHeight) + 1;
+    }
+
+    int countNodes() {
+        return countNodesRec(root);
+    }
+
+    int countNodesRec(Node root) {
+        if (root == null)
+            return 0;
+
+        return 1 + countNodesRec(root.left) + countNodesRec(root.right);
+    }
+
+    int countLeaves() {
+        return countLeavesRec(root);
+    }
+
+    int countLeavesRec(Node root) {
+        if (root == null)
+            return 0;
+
+        if (root.left == null && root.right == null)
+            return 1;
+
+        return countLeavesRec(root.left) + countLeavesRec(root.right);
+    }
+
+    void inOrderTraversal(Node root) {
+        if (root != null) {
+            inOrderTraversal(root.left);
+            System.out.print(root.key + " ");
+            inOrderTraversal(root.right);
+        }
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        BinaryTree tree = new BinaryTree();
+
+        while (true) {
+            System.out.println("\nEnter your choice:");
+            System.out.println("1. Check if the BST is empty");
+            System.out.println("2. Search for an item");
+            System.out.println("3. Insert an item");
+            System.out.println("4. Delete an item");
+            System.out.println("5. Find the height of the BST");
+            System.out.println("6. Find the number of nodes");
+            System.out.println("7. Find the number of leaves");
+            System.out.println("8. Traverse the BST (in-order)");
+            System.out.println("0. Exit");
+
+            int choice = scanner.nextInt();
+
+            switch (choice) {
+                case 1:
+                    System.out.println("Is the BST empty? " + tree.isEmpty());
+                    break;
+                case 2:
+                    System.out.println("Enter the item to search:");
+                    int searchItem = scanner.nextInt();
+                    System.out.println("Item found? " + tree.search(searchItem));
+                    break;
+                case 3:
+                    System.out.println("Enter the item to insert:");
+                    int insertItem = scanner.nextInt();
+                    tree.insert(insertItem);
+                    break;
+                case 4:
+                    System.out.println("Enter the item to delete:");
+                    int deleteItem = scanner.nextInt();
+                    tree.delete(deleteItem);
+                    break;
+                case 5:
+                    System.out.println("Height of the BST: " + tree.height());
+                    break;
+                case 6:
+                    System.out.println("Number of nodes: " + tree.countNodes());
+                    break;
+                case 7:
+                    System.out.println("Number of leaves: " + tree.countLeaves());
+                    break;
+                case 8:
+                    System.out.println("In-order traversal of the BST:");
+                    tree.inOrderTraversal(tree.root);
+                    System.out.println();
+                    break;
+                case 0:
+                    System.out.println("Exiting...");
+                    scanner.close();
+                    System.exit(0);
+                default:
+                    System.out.println("Invalid choice. Please enter a valid option.");
+            }
+        }
+    }
+}
