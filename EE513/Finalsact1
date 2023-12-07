@@ -1,3 +1,5 @@
+//Franco Capangpangan
+
 import java.util.Scanner;
 
 class Node {
@@ -9,14 +11,14 @@ class Node {
         left = right = null;
     }
 }
-
+//Node assigning
 class BinaryTree {
     Node root;
 
     BinaryTree() {
         root = null;
     }
-
+//insert
     void insert(int key) {
         root = insertRec(root, key);
     }
@@ -34,7 +36,7 @@ class BinaryTree {
 
         return root;
     }
-
+//is empty
     boolean isEmpty() {
         return root == null;
     }
@@ -55,7 +57,7 @@ class BinaryTree {
         else
             return searchRec(root.right, key);
     }
-
+//delete a node
     void delete(int key) {
         root = deleteRec(root, key);
     }
@@ -80,7 +82,7 @@ class BinaryTree {
 
         return root;
     }
-
+//minimum value
     int minValue(Node root) {
         int minValue = root.key;
         while (root.left != null) {
@@ -89,7 +91,7 @@ class BinaryTree {
         }
         return minValue;
     }
-
+//height
     int height() {
         return heightRec(root);
     }
@@ -103,7 +105,7 @@ class BinaryTree {
 
         return Math.max(leftHeight, rightHeight) + 1;
     }
-
+//counter of nodes
     int countNodes() {
         return countNodesRec(root);
     }
@@ -114,7 +116,7 @@ class BinaryTree {
 
         return 1 + countNodesRec(root.left) + countNodesRec(root.right);
     }
-
+//counter for leaves
     int countLeaves() {
         return countLeavesRec(root);
     }
@@ -128,7 +130,7 @@ class BinaryTree {
 
         return countLeavesRec(root.left) + countLeavesRec(root.right);
     }
-
+//inorder traversal
     void inOrderTraversal(Node root) {
         if (root != null) {
             inOrderTraversal(root.left);
@@ -136,13 +138,13 @@ class BinaryTree {
             inOrderTraversal(root.right);
         }
     }
-}
+   }
 
-public class Main {
+public class Btree {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         BinaryTree tree = new BinaryTree();
-
+ //while loop
         while (true) {
             System.out.println("\nEnter your choice:");
             System.out.println("1. Check if the BST is empty");
@@ -190,7 +192,7 @@ public class Main {
                     tree.inOrderTraversal(tree.root);
                     System.out.println();
                     break;
-                case 0:
+                 case 0:
                     System.out.println("Exiting...");
                     scanner.close();
                     System.exit(0);
