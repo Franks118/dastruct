@@ -15,7 +15,7 @@ Console.WriteLine("Medium- " +medium);
 small = (bags % 20) % 10 / 2;
 Console.WriteLine("small- "+small);
 
-double total = (20 * 2)*5.50 + (10 * 5.50) + (5 * 2.50) + 3 * 2 + 2.50 + 2;
+double total = (bags*5.50) + 3 * 2 + 2.50 + 2;
 
 
 Console.WriteLine($"Your total Cost: $"+total.ToString("N2"));
