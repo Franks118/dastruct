@@ -1,0 +1,22 @@
+using System.Runtime.InteropServices;
+int bags = 52;
+Console.WriteLine("number of bags ordered"+bags);
+
+Console.WriteLine("Boxes Used");
+
+int large , medium , small;
+
+large = bags / 20;
+Console.WriteLine("large- " + large);
+
+medium = (bags % 20)/10;
+Console.WriteLine("Medium- " +medium);
+
+small = (bags % 20) % 10 / 2;
+Console.WriteLine("small- "+small);
+
+double total = (20 * 2)*5.50 + (10 * 5.50) + (5 * 2.50) + 3 * 2 + 2.50 + 2;
+
+
+Console.WriteLine($"Your total Cost: $"+total.ToString("N2"));
+
